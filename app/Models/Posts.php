@@ -9,4 +9,9 @@ class Posts extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function archive()
+    {
+        $this->is_archived = true;
+    }
 }

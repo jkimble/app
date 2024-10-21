@@ -16,5 +16,6 @@ class ShowPosts extends Component
 
     public function delete(Posts $post) {
         $post->delete();
+        $this->redirect('/posts');
     }
 }
