@@ -13,4 +13,8 @@ class ShowPosts extends Component
             'posts' => Posts::all()
         ]);
     }
+
+    public function delete(Posts $post) {
+        $post->delete();
+    }
 }
