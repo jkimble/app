@@ -40,6 +40,9 @@ class CreatePosts extends Component
             'post_content' => $this->content
         ]);
 
-        $this->redirect('/posts');
+        $this->redirect('/posts', navigate: true);
+        /*
+        navigate: true here allows you to use livewire ajax navigation for redirects
+        */
     }
 }

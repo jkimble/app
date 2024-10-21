@@ -25,9 +25,9 @@
     </head>
     <body>
         <nav>
-            <a href="/" @class(['current' => request()->is('/')])>Todo</a>
-            <a href="/counter" @class(['current' => request()->is('counter')])>Counter</a>
-            <a href="/posts" @class(['current' => request()->is('posts')])>Posts</a>
+            <a wire:navigate {{-- can add this on any link to make ajax --}} href="/" @class(['current' => request()->is('/')])>Todo</a>
+            <a wire:navigate href="/counter" @class(['current' => request()->is('counter')])>Counter</a>
+            <a wire:navigate href="/posts" @class(['current' => request()->is('posts')])>Posts</a>
         </nav>
         {{ $slot }}
     </body>
