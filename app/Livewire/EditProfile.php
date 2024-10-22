@@ -12,7 +12,8 @@ class EditProfile extends Component
     public $name = '';
     public $email = '';
     public $bio = '';
-    //public $user = '';
+
+    public $successIndicator = false;
 
     public function render()
     {
@@ -32,9 +33,20 @@ class EditProfile extends Component
         $this->user->name = $this->name;
         $this->user->email = $this->email;
         $this->user->bio = $this->bio;
-        
+
         $this->user->save();
 
-        $this->redirect('/edit-profile', navigate: true);
+        sleep(1); // addds delay, good for adding wire:loading to a component
+
+        // to add a success message or modal, you can do a few things
+        // $this->dispatch('message') in the class, 
+        // x-on:save-succeed.window to add to component
+        // or below method with alpine and x-show. works bc
+        // we can user $wire inside of alpine statments. check this 
+        // view to see x-show method
+
+        $this->successIndicator = true;
+
+        //$this->redirect('/edit-profile', navigate: true);
     }
 }
