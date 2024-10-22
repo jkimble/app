@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.tailwindcss.com"></script>
         <title>{{ $title ?? 'Page Title' }}</title>
         <style>
             body {
@@ -28,6 +29,11 @@
             <a wire:navigate {{-- can add this on any link to make ajax --}} href="/" @class(['current' => request()->is('/')])>Todo</a>
             <a wire:navigate href="/counter" @class(['current' => request()->is('counter')])>Counter</a>
             <a wire:navigate href="/posts" @class(['current' => request()->is('posts')])>Posts</a>
+            @if(Auth::check())
+                hi, you are logged in as {{ Auth::user()->name }}
+            @else
+                not logged in
+            @endif
         </nav>
         {{ $slot }}
     </body>
