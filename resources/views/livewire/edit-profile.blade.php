@@ -13,12 +13,11 @@
                     'border-red-500' => $errors->has('form.name'),
                 ])
                 {{-- use laravel classes/merging to add better reactivity. above toggles red when submitted without username --}}
+                @error('form.name')
+                    aria-invalid="true"
+                    aria-description="{{ $message }}"
+                @enderror {{-- adding error here allows screen readers to pick up validation message --}}
             >
-            {{--
-            @error('name') 
-                <em>{{ $message }}</em>
-            @enderror
-            --}}
             @error('form.name')
                 <p class="text-sm text-red-500">{{ $message }}</p>
             @enderror
