@@ -1,16 +1,16 @@
-<div>
+<div> {{-- since there's a form object, now all property mentions must be form.property_name. --}}
     <h1 class="font-bold text-3xl">Edit User</h1>
     <form wire:submit='editUser' class="flex flex-col">
         <label>
             <span>Name</span>
             <input 
-                wire:model.blur='name' {{-- blur fires when user leaves the field. can hook into this to pre-validate. done on class. can use .live too but sends a lot more requests to serv. stick with blur --}}
+                wire:model.blur='form.name' {{-- blur fires when user leaves the field. can hook into this to pre-validate. done on class. can use .live too but sends a lot more requests to serv. stick with blur --}}
                 type="text"
                 name="name"
                 @class([
                     'border-2 block',
-                    'border-black' => $errors->missing('name'),
-                    'border-red-500' => $errors->has('name'),
+                    'border-black' => $errors->missing('form.name'),
+                    'border-red-500' => $errors->has('form.name'),
                 ])
                 {{-- use laravel classes/merging to add better reactivity. above toggles red when submitted without username --}}
             >
@@ -19,21 +19,21 @@
                 <em>{{ $message }}</em>
             @enderror
             --}}
-            @error('name')
+            @error('form.name')
                 <p class="text-sm text-red-500">{{ $message }}</p>
             @enderror
         </label>
         <label>
             <span>Email</span>
-            <input wire:model='email' type="email" name="email" class="border-2 border-black block">
-            @error('email') 
+            <input wire:model='form.email' type="email" name="email" class="border-2 border-black block">
+            @error('form.email') 
                 <em>{{ $message }}</em>
             @enderror
         </label>
         <label>
             <span>Bio</span>
-            <input wire:model='bio' type="textarea" name="bio" class="border-2 border-black block">
-            @error('bio') 
+            <input wire:model='form.bio' type="textarea" name="bio" class="border-2 border-black block">
+            @error('form.bio') 
                 <em>{{ $message }}</em>
             @enderror
         </label>
