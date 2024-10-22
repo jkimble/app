@@ -5,10 +5,15 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 
 class EditProfile extends Component
 {
     public User $user;
+    /* directly below makes sure user name is unique in the users table, but does not ignore current user. */
+    // #[Validate('required|unique:users')] this is good for simple validation, make a rules function for more complex validation (below)
+    #[Validate] // adding this blank validate attribute will run validation everytime this field is changed on the front end. used to catch blur and run rules function
     public $name = '';
     public $email = '';
     public $bio = '';
@@ -18,6 +23,15 @@ class EditProfile extends Component
     public function render()
     {
         return view('livewire.edit-profile');
+    }
+
+    public function rules() {
+        return [
+            'name' => [
+                'required',
+                Rule::unique('users')->ignore($this->user),
+            ]
+        ];
     }
 
     public function mount()
@@ -30,6 +44,8 @@ class EditProfile extends Component
 
     public function editUser()
     {
+        $this->validate();
+
         $this->user->name = $this->name;
         $this->user->email = $this->email;
         $this->user->bio = $this->bio;
@@ -49,4 +65,10 @@ class EditProfile extends Component
 
         //$this->redirect('/edit-profile', navigate: true);
     }
-}
+
+    /* ------- this can be used to catch blur, or other events when component is updated
+    public function updated() {
+
+    }
+    */
+}   
