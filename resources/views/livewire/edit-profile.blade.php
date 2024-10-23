@@ -3,7 +3,7 @@
     <form wire:submit='editUser' class="flex flex-col">
         <label>
             <span>Name</span>
-            <input 
+            <input required 
                 wire:model.blur='form.name' {{-- blur fires when user leaves the field. can hook into this to pre-validate. done on class. can use .live too but sends a lot more requests to serv. stick with blur --}}
                 type="text"
                 name="name"
@@ -22,6 +22,7 @@
                 <p class="text-sm text-red-500">{{ $message }}</p>
             @enderror
         </label>
+
         <label>
             <span>Email</span>
             <input wire:model='form.email' type="email" name="email" class="border-2 border-black block">
@@ -29,6 +30,35 @@
                 <em>{{ $message }}</em>
             @enderror
         </label>
+
+        <label>
+            <span>Country</span>
+            <select 
+                wire:model.blur='form.country' {{-- blur fires when user leaves the field. can hook into this to pre-validate. done on class. can use .live too but sends a lot more requests to serv. stick with blur --}}
+                type="text"
+                name="name"
+                @class([
+                    'border-2 block',
+                    'border-black' => $errors->missing('form.country'),
+                    'border-red-500' => $errors->has('form.country'),
+                ])
+                {{-- use laravel classes/merging to add better reactivity. above toggles red when submitted without username --}}
+                @error('form.country')
+                    aria-invalid="true"
+                    aria-description="{{ $message }}"
+                @enderror {{-- adding error here allows screen readers to pick up validation message --}}
+            >
+            <option selected>choose country</option>
+            <option>United States</option>
+            <option>Mexico</option>
+            <option>Cuba</option>
+            <option>Djibouti</option>
+            </select>
+            @error('form.country')
+                <p class="text-sm text-red-500">{{ $message }}</p>
+            @enderror
+        </label>
+        
         <label>
             <span>Bio</span>
             <textarea wire:model='form.bio' type="textarea" name="bio" class="border-2 border-black block"></textarea>
@@ -36,6 +66,7 @@
                 <em>{{ $message }}</em>
             @enderror
         </label>
+
         <fieldset>
             <legend class="block">Recieve Emails?</legend>
             <div class="flex flex-col gap-3">

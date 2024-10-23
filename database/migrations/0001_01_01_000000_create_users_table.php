@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->text('bio')->nullable();
+            $table->string('country')->nullable();
             $table->boolean('recieve_emails')->nullable();
             $table->boolean('recieve_updates')->nullable();
             $table->boolean('recieve_offers')->nullable();

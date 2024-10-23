@@ -17,6 +17,7 @@ class ProfileForm extends Form
     public $recieve_emails = false;
     public $recieve_updates = false;
     public $recieve_offers = false;
+    public $country= '';
 
     public function rules()
     {
@@ -24,7 +25,8 @@ class ProfileForm extends Form
             'name' => [
                 'required',
                 Rule::unique('users')->ignore($this->user),
-            ]
+            ],
+            'country' => ['required']
         ];
     }
 
@@ -35,6 +37,7 @@ class ProfileForm extends Form
         $this->name = $this->user->name;
         $this->email = $this->user->email;
         $this->bio = $this->user->bio;
+        $this->country = $this->user->country;
         $this->recieve_emails = $this->user->recieve_emails;
         $this->recieve_updates = $this->user->recieve_updates;
         $this->recieve_offers = $this->user->recieve_offers;
@@ -47,6 +50,7 @@ class ProfileForm extends Form
         $this->user->name = $this->name;
         $this->user->email = $this->email;
         $this->user->bio = $this->bio;
+        $this->user->country = $this->country;
         $this->user->recieve_emails = $this->recieve_emails;
         $this->user->recieve_updates = $this->recieve_updates;
         $this->user->recieve_offers = $this->recieve_offers;
