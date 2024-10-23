@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Enums\Country;
 use App\Models\User;
 use Livewire\Attributes\Validate;
 use Illuminate\Validation\Rule;
@@ -17,7 +18,7 @@ class ProfileForm extends Form
     public $recieve_emails = false;
     public $recieve_updates = false;
     public $recieve_offers = false;
-    public $country= '';
+    public Country $country;
 
     public function rules()
     {

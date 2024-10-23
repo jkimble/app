@@ -49,10 +49,9 @@
                 @enderror {{-- adding error here allows screen readers to pick up validation message --}}
             >
             <option selected>choose country</option>
-            <option>United States</option>
-            <option>Mexico</option>
-            <option>Cuba</option>
-            <option>Djibouti</option>
+            @foreach (App\Enums\Country::cases() as $country) {{-- changed select options to enum, works better when manipulating DB. needs full App\ path since in blade file --}}
+                <option value="{{ $country->value }}">{{ /* $country->name */ $country->label() }}</option> {{-- can add functions to enums like so to manipulate data before hitting the blade temp --}}
+            @endforeach
             </select>
             @error('form.country')
                 <p class="text-sm text-red-500">{{ $message }}</p>
