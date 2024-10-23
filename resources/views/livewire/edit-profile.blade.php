@@ -31,11 +31,33 @@
         </label>
         <label>
             <span>Bio</span>
-            <input wire:model='form.bio' type="textarea" name="bio" class="border-2 border-black block">
+            <textarea wire:model='form.bio' type="textarea" name="bio" class="border-2 border-black block"></textarea>
             @error('form.bio') 
                 <em>{{ $message }}</em>
             @enderror
         </label>
+        <fieldset>
+            <legend class="block">Recieve Emails?</legend>
+            <div class="flex flex-col gap-3">
+                <label><input wire:model.boolean="form.recieve_emails" type="radio" name="recieve_emails" value="true">yes</label>
+                <label><input wire:model.boolean="form.recieve_emails" type="radio" name="recieve_emails" value="false">no</label>
+            </div>
+            @error('form.bio') 
+                <em>{{ $message }}</em>
+            @enderror
+        </fieldset>
+
+        <fieldset x-show="$wire.form.recieve_emails" x-collapse {{-- $wire still used to get component/model values into alpine///x-collapse  --}}>
+            <legend class="block">Email type</legend>
+            <div class="flex flex-col gap-3">
+                <label><input wire:model.boolean="form.recieve_updates" type="checkbox" name="recieve_updates">general updates</label>
+                <label><input wire:model.boolean="form.recieve_offers" type="checkbox" name="recieve_offers">marketing offers</label>
+            </div>
+            @error('form.bio') 
+                <em>{{ $message }}</em>
+            @enderror
+        </fieldset>
+
         <button type="submit" class="bg-blue-400 text-white font-bold disabled:cursor-not-allowed flex flex-row flex-nowrap justify-between items-center p-2">
             <span>Submit</span>        
             <div wire:loading {{-- can use wire:loading.flex for flex elements --}} wire:target='editUser' {{-- wire:target lets this only fire when the desired function is fired --}} role="status">
@@ -47,6 +69,7 @@
             </div>
         </button>
     </form>
+    
 
     <div class="text-green-600"
         x-show="$wire.successIndicator"

@@ -22,7 +22,12 @@ class User extends Authenticatable
         'password',
     ];*/
     protected $guarded = [];
-
+    protected $casts = [ /* MAKE SURE TO ADD ALL BOOLS TO CASTS OR THEY WONT WORK ON FRONTEND */
+        'recieve_emails' => 'boolean',
+        'recieve_updates' => 'boolean',
+        'recieve_offers' => 'boolean'
+    ];
+ 
     /**
      * The attributes that should be hidden for serialization.
      *

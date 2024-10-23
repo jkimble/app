@@ -14,6 +14,9 @@ class ProfileForm extends Form
     public $name = '';
     public $email = '';
     public $bio = '';
+    public $recieve_emails = false;
+    public $recieve_updates = false;
+    public $recieve_offers = false;
 
     public function rules()
     {
@@ -25,12 +28,16 @@ class ProfileForm extends Form
         ];
     }
 
-    public function setUser(User $user) {
+    public function setUser(User $user)
+    {
         //$this->user = Auth::user(); ----- user passed as param
         $this->user = $user;
         $this->name = $this->user->name;
         $this->email = $this->user->email;
         $this->bio = $this->user->bio;
+        $this->recieve_emails = $this->user->recieve_emails;
+        $this->recieve_updates = $this->user->recieve_updates;
+        $this->recieve_offers = $this->user->recieve_offers;
     }
 
     public function update()
@@ -40,6 +47,9 @@ class ProfileForm extends Form
         $this->user->name = $this->name;
         $this->user->email = $this->email;
         $this->user->bio = $this->bio;
+        $this->user->recieve_emails = $this->recieve_emails;
+        $this->user->recieve_updates = $this->recieve_updates;
+        $this->user->recieve_offers = $this->recieve_offers;
 
         $this->user->save();
     }
